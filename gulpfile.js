@@ -6,15 +6,13 @@ let babel = require('rollup-plugin-babel');
 let sourcemaps = require('gulp-sourcemaps');
 let cssmin = require('gulp-cssmin');
 let del = require('del');
-//var gutil = require('gulp-util');
+let browserSync = require('browser-sync').create();
 
 let paths = {
-    vendor: [
-        'public/js/tools/*.js'
-    ],
-    styles: ['public/css/*.css'],
-    fonts: ['public/fonts/*.*'],
-    img: ['public/img/*.*']
+    vendor: ['src/js/tools/*.js'],
+    styles: ['src/css/*.css'],
+    fonts: ['src/fonts/*.*'],
+    img: ['src/img/*.*']
 };
 
 gulp.task('clean', function() {
@@ -27,7 +25,8 @@ gulp.task('css', function() {
         .pipe(sourcemaps.init())
         .pipe(cssmin())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('public/build/css'));
+        .pipe(gulp.dest('public/build/css'))
+        .pipe(browserSync.stream());
 });
 
 gulp.task('scripts', function() {
@@ -38,6 +37,7 @@ gulp.task('scripts', function() {
         // .pipe(uglify())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('public/build/js'))
+        .pipe(browserSync.stream());
 });
 
 gulp.task('vendor', function() {
