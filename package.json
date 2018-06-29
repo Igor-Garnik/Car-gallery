@@ -30,7 +30,6 @@
     "gulp-css": "gulp css",
     "gulp-clean": "gulp clean"
   },
-  
   "keywords": [
     "mvc"
   ],
@@ -38,5 +37,3 @@
   "license": "MIT",
   "optionalDependencies": {}
 }
-
-
