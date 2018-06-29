@@ -26,7 +26,7 @@ gulp.task('fonts', function() {
 
 gulp.task('fa', function() {
 	return gulp.src('node_modules/font-awesome/css/font-awesome.min.css', 'node_modules/bootstrap/dist/css/bootstrap.min.css')
-		.pipe(gulp.dest('puclic/build/vendor'));
+		.pipe(gulp.dest('public/build/vendor'));
 });
 
 gulp.task('css', function() {
