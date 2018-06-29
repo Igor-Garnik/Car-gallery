@@ -7,12 +7,17 @@ var gulp = require('gulp'),
     babel = require('rollup-plugin-babel'),
     sourcemaps = require('gulp-sourcemaps'),
     cssmin = require('gulp-cssmin'),
-    browserSync = require('browser-sync').create();
-    var browserSyncOptions = {
-        browser: "google chrome",
-        proxy: "localhost:3000",
-        notify: false
-    };
+    browserSync = require('browser-sync').create(),
+    del = require('del');
+var browserSyncOptions = {
+    browser: "google chrome",
+    proxy: "localhost:3000",
+    notify: false
+};
+
+gulp.task('del', function() {
+    return del.sync('public/build')
+});
 
 gulp.task('js', function() {
 	return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/popper.js/dist/umd/popper.min.js'])
@@ -26,7 +31,7 @@ gulp.task('fonts', function() {
 
 gulp.task('fa', function() {
 	return gulp.src('node_modules/font-awesome/css/font-awesome.min.css', 'node_modules/bootstrap/dist/css/bootstrap.min.css')
-		.pipe(gulp.dest('puclic/build/vendor'));
+		.pipe(gulp.dest('public/build/vendor'));
 });
 
 gulp.task('css', function() {
@@ -66,6 +71,6 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', gulp.series(
-    gulp.parallel('js', 'css', 'scripts', 'fonts', 'fa'),
+    gulp.parallel('del', 'js', 'css', 'scripts', 'fonts', 'fa'),
     gulp.parallel('watch', 'serve')
 ));

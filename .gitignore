@@ -1,0 +1,5 @@
+#node modules folder
+node_modules/
+
+#public folder
+public/build
