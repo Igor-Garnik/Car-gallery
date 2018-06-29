@@ -26,4 +26,12 @@ export default class Utils {
         let credentials = JSON.parse(localStorage.getItem('credentials'));
         return !!credentials;
     }
+
+    static setLocalStorage (value, key) {
+		localStorage.setItem(value, key);
+	}
+
+	static getLocalStorage (value) {
+		return localStorage.getItem(value);
+	}
 }

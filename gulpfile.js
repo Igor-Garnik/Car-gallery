@@ -20,7 +20,7 @@ gulp.task('del', function() {
 });
 
 gulp.task('js', function() {
-	return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/popper.js/dist/umd/popper.min.js'])
+	return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/popper.js/dist/umd/popper.min.js', 'node_modules/moment/src/moment.js'])
 		.pipe(gulp.dest("public/build/tools"));
 })
 
@@ -71,6 +71,6 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', gulp.series(
-    gulp.parallel('del', 'js', 'css', 'scripts', 'fonts', 'fa'),
+    gulp.parallel('js', 'css', 'scripts', 'fonts', 'fa'),
     gulp.parallel('watch', 'serve')
 ));
