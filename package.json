@@ -12,14 +12,11 @@
     "popper.js": "^1.14.3"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
     "browser-sync": "^2.24.5",
-    "del": "^3.0.0",
-    "gulp": "^3.9.1",
+    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-better-rollup": "^3.1.0",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
-    "gulp-es6-module-jstransform": "^0.1.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify-es": "^1.0.1",
     "rollup-plugin-babel": "^3.0.4"
@@ -33,9 +30,13 @@
     "gulp-css": "gulp css",
     "gulp-clean": "gulp clean"
   },
+  
   "keywords": [
     "mvc"
   ],
   "author": "Igor",
-  "license": "MIT"
+  "license": "MIT",
+  "optionalDependencies": {}
 }
+
+

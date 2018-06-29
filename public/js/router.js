@@ -12,6 +12,8 @@ import ProfileModel from './profile/profile.model.js';
 import ProfileView from './profile/profile.view.js';
 import ProfileController from './profile/profile.controller.js'
 
+let wraper = document.querySelector("#wrapper");
+
 let routeConfig = {
     "" : () => {
         utils.initTemplate(wrapper, "login-view");
@@ -20,14 +22,14 @@ let routeConfig = {
         let controller = new LoginController(model, view, utils);
     }, 
     "gallery" : () => {
-        utils.initTemplate(wrapper, "gallery-view");
+  /*       utils.initTemplate(wrapper, "gallery-view"); */
         let model = new GalleryModel;
         let view = new GalleryView;
         let observer = new Observer;
         new GalleryController(model, view, observer, utils);
     },
     "profile" : () => {
-        utils.initTemplate(wrapper, "profile-view");
+    /*     utils.initTemplate(wrapper, "profile-view"); */
         let model = new ProfileModel;
         let view = new ProfileView;
         new ProfileController(model, view, utils);

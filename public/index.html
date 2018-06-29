@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Bootstrap project</title>
-        <link rel="stylesheet" href="public/buildcss/font-awesome.min.css">
-        <link rel="stylesheet" href="public/buildcss/bootstrap.css">
-        <link rel="stylesheet" href="public/build/css/main.min.css">
+        <link rel="stylesheet" href="build/css/main.min.css">
+        <link rel="stylesheet" href="build/vendor/bootstrap.min.css">
+        <link rel="stylesheet" href="build/vendor/font-awesome.min.css">
     </head>
     <body>
         <div id="myModal" class="modal fade">
@@ -33,20 +33,29 @@
             </nav> 	
             </div>
         </div>
-    
+
+        <main role="main">
+            <div class="container">
+                <div class="text-center" id="wrapper"></div>
+            </div>
+        </main>
+        
         <main id="main" class="text-center" role="main">
-            <div class="alert alert-danger alert-window hide" role="alert"></div>
-            <form id="login-form" class="form-signin">
-                <h1 class="h3 mb-3 font-weight-normal">Пожалуйста войдите</h1>
-                <label for="inputEmail" class="sr-only">Email</label>
-                <input type="text" id="inputEmail" class="form-control" placeholder="Email address" autocomplete="on" required="" autofocus="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
-                <div class="mb-3"></div>
-                <label for="inputPassword" class="sr-only">Пароль</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="on" required="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
-                <div class="mb-3"></div>
-                <button id="log-in-form" class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-                <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
-            </form>
+            <!-- Валидация -->
+            <template id="login-view">
+                <div class="alert alert-danger alert-window hide" role="alert"></div>
+                <form id="login-form" class="form-signin">
+                    <h1 class="h3 mb-3 font-weight-normal">Пожалуйста войдите</h1>
+                    <label for="inputEmail" class="sr-only">Email</label>
+                    <input type="text" id="inputEmail" class="form-control" placeholder="Email address" autocomplete="on" required="" autofocus="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
+                    <div class="mb-3"></div>
+                    <label for="inputPassword" class="sr-only">Пароль</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="on" required="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
+                    <div class="mb-3"></div>
+                    <button id="log-in-form" class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+                    <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+                </form>
+            </template>
 
             <div class="container form change-img hide">	
                 <form class="container change ">
@@ -143,10 +152,10 @@
                 </div>
             </div>
         </div>
-        
+
         <script type="module" src="build/js/app.min.js"></script>
-        <script src="public/build/tools/jquery.min.js"></script>
-        <script src="public/build/tools/popper.min.js"></script>
-        <script src="public/build/tools/bootstrap.min.js"></script>
+        <script src="build/tools/jquery.min.js"></script>
+        <script src="build/tools/popper.min.js"></script>
+        <script src="build/tools/bootstrap.min.js"></script>
     </body>
 </html>
