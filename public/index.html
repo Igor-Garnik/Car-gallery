@@ -10,6 +10,115 @@
         <link rel="stylesheet" href="build/vendor/font-awesome.min.css">
     </head>
     <body>
+    
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+            <h5 class="my-0 mr-md-auto font-weight-normal">Cars gallery</h5>
+            <div id="top-panel-navigation" class="hide">
+                <nav class="my-2 my-md-0 mr-md-3 top-panel">
+                    <a class="p-2 text-dark hide" href="#gallery">Галлерея</a>
+                    <a class="p-2 text-dark hide"  href="#profile">О пользователе</a>
+                    <a id="log-out-btn" class="btn btn-outline-primary hide" href="#">Выход</a>
+                </nav> 	
+            </div>   
+        </div>
+
+        <main role="main">
+            <div class="container">
+                <div class="text-center" id="wrapper"></div>
+            </div>
+        </main>
+        
+        <main id="main" class="text-center" role="main">
+
+            <!-- Validation state -->
+            <template id="login-view">
+                <div class="alert alert-danger alert-window hide" role="alert"></div>
+                <form id="login-form" class="form-signin">
+                    <h1 class="h3 mb-3 font-weight-normal">Пожалуйста войдите</h1>
+                    <label for="email" class="sr-only">Email</label>
+                    <input type="text" id="email" class="form-control" placeholder="Email address" autocomplete="on" required="" autofocus="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
+                    <div class="mb-3"></div>
+                    <label for="password" class="sr-only">Пароль</label>
+                    <input type="password" id="password" class="form-control" placeholder="Password" autocomplete="on" required="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
+                    <div class="mb-3"></div>
+                    <button id="log-in-btn" class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+                    <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+                </form>
+            </template>
+                
+            <!-- User state -->
+            <template id="profile-view">
+                <div class="contant user-window">
+                    <div class="user-form">
+                        <div class="control-panel">
+                            <h1 class="h3 font-weight-normal control-panel__title">Информация о пользователе</h1>
+                            <div class="fields-input">
+                                <div class="item">
+                                    <p class="input-title">Логин</p>
+                                    <input type="text" id="otputEmail" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off" value="" disabled>
+                                </div>
+                                <div class="item">
+                                    <p class="input-title">Пароль</p>
+                                    <input type="password" id="otputPassword" class="form-control" placeholder="Password" required="" autocomplete="on" value="" disabled>
+                                    <button id="show-password" class="btn btn-md btn-primary btn-block" type="button">Показать пароль</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+       
+            <!-- Gallery state -->
+            <template id="gallery-view">
+                <div role="main" class="gallery-window">
+                    <section class="jumbotron text-center">
+                        <div class="container">
+                            <h1 class="jumbotron-heading">Автомобильная галлерея</h1>
+                            <p class="lead text-muted">На этой странице вы можете увидеть отличную галлерею, которая дает вам возможность ознакомится с нашим каталогом транспортных средств. </p>  
+                            <div class="row menu add-picture">
+                                <div class="col-md-12">
+                                    <div class="btn-group">
+                                        <button id="add-img" type="button" class="btn btn-success ">Добавить изображение</button>
+                                    </div>
+                                </div>  
+                            </div>
+
+                            <div class="row menu ">
+                                <div class="col-md-6 ">
+                                    <div class="btn-group" id="dropdown-name">
+                                        <button id="name" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Фильтровать по имени
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a id = "abc" class="dropdown-item" sorting-type="abc" href="#">Прямой порядок: A-Z</a>
+                                            <a id = "zyx" class="dropdown-item" sorting-type="zyx" href="#">Обратный порядок: Z-A</a>                
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 date" >
+                                    <div class="btn-group" id="dropdown-date">
+                                        <button id="date" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Фильтровать по дате</button>
+                                        <div class="dropdown-menu">
+                                            <a id="first" class="dropdown-item" sorting-type="first" href="#">Сначала новые</a>
+                                            <a id="last" class="dropdown-item" sorting-type="last" href="#">Сначала старые</a>                  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <div class="album py-5 bg-light">
+                        <div class="container">
+                            <div class="row" id="gallery"></div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </main>
+
+        <!-- Modal window -->
         <div id="myModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -22,140 +131,41 @@
                 </div>
             </div>
         </div>
-    
-        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-            <h5 class="my-0 mr-md-auto font-weight-normal">JSExpert</h5>
-            <div class="main-menu hide">
-            <nav class="my-2 my-md-0 mr-md-3 top-panel">
-                <a class="p-2 text-dark user-gallery-window " href="#">Галлерея</a>
-                <a class="p-2 text-dark user-data-window " href="#">О пользователе</a>
-                <a id="log-out-btn" class="btn btn-outline-primary" href="#">Выход</a>
-            </nav> 	
-            </div>
-        </div>
 
-        <main role="main">
-            <div class="container">
-                <div class="text-center" id="wrapper"></div>
-            </div>
-        </main>
-        
-        <main id="main" class="text-center" role="main">
-            <!-- Валидация -->
-            <template id="login-view">
-                <div class="alert alert-danger alert-window hide" role="alert"></div>
-                <form id="login-form" class="form-signin">
-                    <h1 class="h3 mb-3 font-weight-normal">Пожалуйста войдите</h1>
-                    <label for="inputEmail" class="sr-only">Email</label>
-                    <input type="text" id="inputEmail" class="form-control" placeholder="Email address" autocomplete="on" required="" autofocus="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
-                    <div class="mb-3"></div>
-                    <label for="inputPassword" class="sr-only">Пароль</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="on" required="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
-                    <div class="mb-3"></div>
-                    <button id="log-in-form" class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-                    <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
-                </form>
-            </template>
-
-            <div class="container form change-img hide">	
-                <form class="container change ">
-                    <div class="form-group">
-                        <label for="form-url">Введите URL</label>
-                        <input type="text" class="form-control input-url" id="form-url" placeholder="">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="form-name">Введите имя</label>
-                        <input type="text" class="form-control form-name" id="form-name" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="form-description">Example textarea</label>
-                        <textarea class="form-control input-description" id="form-description" rows="3" placeholder=""></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="form-date">Введите дату</label>
-                        <input type="text" class="form-control input-date" id="form-date" placeholder="">
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="btn-group">
-                                <button id="add-img" type="button" class="btn btn-success ">Добавить изображение</button>
-                            </div>
-                        </div>  
-                    </div>
-
-                </form>
-            </div>	
-
-            <div class="contant user-window hide  ">
-                <div class="user-form">
-                    <div class="control-panel">
-                        <h1 class="h3 font-weight-normal control-panel__title">Информация о пользователе</h1>
-                        <div class="fields-input">
-                            <div class="item">
-                                <p class="input-title">Логин</p>
-                                <input type="text" id="otputEmail" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off" value="" disabled>
-                            </div>
-                            <div class="item">
-                                <p class="input-title">Пароль</p>
-                                <input type="password" id="otputPassword" class="form-control" placeholder="Password" required="" autocomplete="on" value="" disabled>
-                                <button id="show-password" class="btn btn-md btn-primary btn-block" type="button">Показать пароль</button>
-                            </div>
-                        </div>
-                    </div>
+        <!-- New card window -->
+        <div class="container form change-img hide">	
+            <form class="container change ">
+                <div class="form-group">
+                    <label for="form-url">Введите URL</label>
+                    <input type="text" class="form-control input-url" id="form-url" placeholder="">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
-            </div>
-        </main>
-                   
-        <div role="main" class="gallery-window hide">
-            <section class="jumbotron text-center">
-                <div class="container">
-                    <h1 class="jumbotron-heading">Автомобильная галлерея</h1>
-                    <p class="lead text-muted">На этой странице вы можете увидеть отличную галлерею, которая дает вам возможность ознакомится с нашим каталогом транспортных средств. </p>  
-                    <div class="row menu add-picture">
-                        <div class="col-md-12">
-                            <div class="btn-group">
-                                <button id="add-img" type="button" class="btn btn-success ">Добавить изображение</button>
-                            </div>
-                        </div>  
-                    </div>
-
-                    <div class="row menu ">
-                        <div class="col-md-6 ">
-                            <div class="btn-group" id="dropdown-name">
-                                <button id="name" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Фильтровать по имени
-                                </button>
-                                <div class="dropdown-menu">
-                                     <a id = "abc" class="dropdown-item" sorting-type="abc" href="#">Прямой порядок: A-Z</a>
-                                     <a id = "zyx" class="dropdown-item" sorting-type="zyx" href="#">Обратный порядок: Z-A</a>                
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6 date" >
-                            <div class="btn-group" id="dropdown-date">
-                                <button id="date" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Фильтровать по дате</button>
-                                <div class="dropdown-menu">
-                                    <a id="first" class="dropdown-item" sorting-type="first" href="#">Сначала новые</a>
-                                    <a id="last" class="dropdown-item" sorting-type="last" href="#">Сначала старые</a>                  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="form-name">Введите имя</label>
+                    <input type="text" class="form-control form-name" id="form-name" placeholder="">
                 </div>
-            </section>
-            
-            <div class="album py-5 bg-light">
-                <div class="container">
-                    <div class="row" id="gallery"></div>
+                <div class="form-group">
+                    <label for="form-description">Example textarea</label>
+                    <textarea class="form-control input-description" id="form-description" rows="3" placeholder=""></textarea>
                 </div>
-            </div>
-        </div>
-
+                <div class="form-group">
+                    <label for="form-date">Введите дату</label>
+                    <input type="text" class="form-control input-date" id="form-date" placeholder="">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="btn-group">
+                            <button id="add-img" type="button" class="btn btn-success ">Добавить изображение</button>
+                        </div>
+                    </div>  
+                </div>
+            </form>
+        </div>	
+;kjoh
         <script type="module" src="build/js/app.min.js"></script>
         <script src="build/tools/jquery.min.js"></script>
         <script src="build/tools/popper.min.js"></script>
         <script src="build/tools/bootstrap.min.js"></script>
+        <script src="build/tools/moment.js"></script>
     </body>
 </html>
