@@ -31,7 +31,7 @@ export default class LoginController {
         }
     }
 
-    logoutHandler() {
+    logOutHandler() {
         this.view.hideNavigation();
         this.model.logOut();
         this.utils.navigateTo("");
