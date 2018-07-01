@@ -11,9 +11,9 @@ var gulp = require('gulp'),
     del = require('del');
 
 
-gulp.task('clean', gulp.series(function(done) {
+/* gulp.task('clean', gulp.series(function(done) {
     return del(['public/build'], done);
-}));
+})); */
 
 
 gulp.task('js', function() {
@@ -27,16 +27,13 @@ gulp.task('fonts', function() {
 });
 
 gulp.task('fa', function() {
-<<<<<<< HEAD
-	return gulp.src('node_modules/font-awesome/css/font-awesome.min.css', 'node_modules/bootstrap/dist/css/bootstrap.min.css')
-=======
 	return gulp.src('node_modules/font-awesome/css/font-awesome.min.css')
 		.pipe(gulp.dest('public/build/vendor'));
 });
 
 gulp.task('bootstrap', function() {
 	return gulp.src('node_modules/bootstrap/dist/css/bootstrap.min.css')
->>>>>>> dev
+
 		.pipe(gulp.dest('public/build/vendor'));
 });
 
