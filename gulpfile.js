@@ -7,17 +7,12 @@ var gulp = require('gulp'),
     babel = require('rollup-plugin-babel'),
     sourcemaps = require('gulp-sourcemaps'),
     cssmin = require('gulp-cssmin'),
-    browserSync = require('browser-sync').create(),
-    del = require('del');
+    browserSync = require('browser-sync');
 
-
-/* gulp.task('clean', gulp.series(function(done) {
-    return del(['public/build'], done);
-})); */
-
+const server = browserSync.create();
 
 gulp.task('js', function() {
-	return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/popper.js/dist/umd/popper.min.js', 'public/tools/moment.js'])
+	return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.min.js', 'node_modules/jquery/dist/jquery.min.js', 'node_modules/popper.js/dist/umd/popper.min.js', 'node_modules/moment/min/moment.min.js'])
 		.pipe(gulp.dest("public/build/tools"));
 })
 
@@ -33,7 +28,6 @@ gulp.task('fa', function() {
 
 gulp.task('bootstrap', function() {
 	return gulp.src('node_modules/bootstrap/dist/css/bootstrap.min.css')
-
 		.pipe(gulp.dest('public/build/vendor'));
 });
 
@@ -56,34 +50,27 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('public/build/js'))
 });
 
-function compileMoment(compile) {
-    gulp.task(compile, function() {
-        return gulp.src(['public/vendor/moment.js'])
-        .pipe(rollup({plugins: [babel()]}, 'iife'))
-        .pipe(gulp.dest('public/build/vendor'))
-        .pipe(concat('moment.min.js'))
-        .pipe(uglify());
-    })
-} 
+function reload(done) {
+    server.reload();
+    done();
+}
 
-gulp.task('browser-sync', function() {
-	browserSync.init({
-		server: {
-			baseDir: 'public'
-        },
-        options: {
-            browser: "google chrome"
+function serve(done) {
+    server.init({
+        server: {
+            baseDir: './public'
         }
     });
+    done();
+}
+
+gulp.task('watch-build', function() {
+    gulp.watch('public/js/**/*.js', gulp.series('scripts'));
+    gulp.watch('public/css/*.css', gulp.series('css'));
+    gulp.watch(['public/build/**/*', 'public/**/*.html'], gulp.series(reload));
 });
 
-gulp.task('watch', function() {
-    gulp.watch('public/js/app.js',gulp.series('scripts'));
-    gulp.watch('public/css/*.css',gulp.series('css'));
-    gulp.watch(['public/*.html', 'public/css/*.css', 'public/js/**/*.js']).on('change', browserSync.reload);
-});
+gulp.task('default', gulp.series('js', 'css', 'scripts', 'fonts', 'fa', 'bootstrap', serve));
 
-gulp.task('default', gulp.series(
-    gulp.parallel('js', 'css', 'scripts', 'fonts', 'fa', 'bootstrap', 'browser-sync'),
-    gulp.parallel('watch' )
-));
+gulp.task('watch', gulp.series('default', 'watch-build'));
+

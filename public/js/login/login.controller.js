@@ -4,6 +4,8 @@ export default class LoginController {
         this.view = view;
         this.util = utils;
         this.init();
+        this.tect = null;
+
     }
 
     init() {
